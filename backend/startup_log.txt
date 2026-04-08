@@ -1,0 +1,38 @@
+﻿python : Traceback 
+(most recent call 
+last):
+At line:1 char:1
++ python 
+backend/app.py 2>&1 | 
+Out-File -Encoding 
+utf8 backend/startup_ 
+...
++ ~~~~~~~~~~~~~~~~~~~~~
+~~~~~
+    + CategoryInfo     
+         : NotSpecifi  
+  ed: (Traceback (mo   
+ st recent call las    
+t)::String) [], Re    
+moteException
+    + FullyQualifiedEr 
+   rorId : NativeComm  
+  andError
+ 
+  File "C:\Users\ARYAN 
+- AYUSH\Downloads\Smart
+FarmAiT1b1.0\SmartFarmA
+iT1\backend\app.py", 
+line 12, in <module>
+    from ai_interface 
+import (
+    ...<2 lines>...
+    )
+ImportError: cannot 
+import name 
+'get_ndvi_score' from 
+'ai_interface' 
+(C:\Users\ARYAN - AYUSH
+\Downloads\SmartFarmAiT
+1b1.0\SmartFarmAiT1\bac
+kend\ai_interface.py)

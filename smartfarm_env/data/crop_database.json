@@ -1,0 +1,527 @@
+[
+    {
+        "id": 1,
+        "name_en": "Wheat",
+        "name_hi": "गेहूं",
+        "category": "Cereals",
+        "icon": "🌾",
+        "origin": "India",
+        "is_indian": true,
+        "growth_params": {
+            "temp_range": [
+                10,
+                25
+            ],
+            "humidity_range": [
+                40,
+                70
+            ],
+            "ph_range": [
+                6.0,
+                7.5
+            ],
+            "rainfall_mm": 500,
+            "npk_preferred": [
+                120,
+                60,
+                40
+            ]
+        },
+        "market_data": {
+            "mandi_price": 2275,
+            "ai_price": 2425,
+            "trend": "stable",
+            "change": "5.1%"
+        }
+    },
+    {
+        "id": 2,
+        "name_en": "Rice (Paddy)",
+        "name_hi": "धान",
+        "category": "Cereals",
+        "icon": "🍚",
+        "origin": "India",
+        "is_indian": true,
+        "growth_params": {
+            "temp_range": [
+                20,
+                35
+            ],
+            "humidity_range": [
+                60,
+                90
+            ],
+            "ph_range": [
+                5.5,
+                6.5
+            ],
+            "rainfall_mm": 1200,
+            "npk_preferred": [
+                100,
+                50,
+                50
+            ]
+        },
+        "market_data": {
+            "mandi_price": 2183,
+            "ai_price": 2424,
+            "trend": "up",
+            "change": "2.8%"
+        }
+    },
+    {
+        "id": 3,
+        "name_en": "Soybean",
+        "name_hi": "सोयाबीन",
+        "category": "Oilseeds",
+        "icon": "🫘",
+        "origin": "India",
+        "is_indian": true,
+        "growth_params": {
+            "temp_range": [
+                20,
+                30
+            ],
+            "humidity_range": [
+                50,
+                75
+            ],
+            "ph_range": [
+                6.0,
+                7.0
+            ],
+            "rainfall_mm": 800,
+            "npk_preferred": [
+                20,
+                80,
+                40
+            ]
+        },
+        "market_data": {
+            "mandi_price": 4600,
+            "ai_price": 4618,
+            "trend": "up",
+            "change": "6.4%"
+        }
+    },
+    {
+        "id": 4,
+        "name_en": "Maize",
+        "name_hi": "मक्का",
+        "category": "Cereals",
+        "icon": "🌽",
+        "origin": "India",
+        "is_indian": true,
+        "growth_params": {
+            "temp_range": [
+                18,
+                27
+            ],
+            "humidity_range": [
+                55,
+                80
+            ],
+            "ph_range": [
+                5.8,
+                7.5
+            ],
+            "rainfall_mm": 650,
+            "npk_preferred": [
+                120,
+                60,
+                40
+            ]
+        },
+        "market_data": {
+            "mandi_price": 2090,
+            "ai_price": 2039,
+            "trend": "up",
+            "change": "5.2%"
+        }
+    },
+    {
+        "id": 5,
+        "name_en": "Onion",
+        "name_hi": "प्याज",
+        "category": "Vegetables",
+        "icon": "🧅",
+        "origin": "India",
+        "is_indian": true,
+        "growth_params": {
+            "temp_range": [
+                15,
+                25
+            ],
+            "humidity_range": [
+                60,
+                75
+            ],
+            "ph_range": [
+                6.5,
+                7.5
+            ],
+            "rainfall_mm": 400,
+            "npk_preferred": [
+                100,
+                50,
+                50
+            ]
+        },
+        "market_data": {
+            "mandi_price": 2500,
+            "ai_price": 2525,
+            "trend": "up",
+            "change": "5.0%"
+        }
+    },
+    {
+        "id": 6,
+        "name_en": "Tomato",
+        "name_hi": "टमाटर",
+        "category": "Vegetables",
+        "icon": "🍅",
+        "origin": "India",
+        "is_indian": true,
+        "growth_params": {
+            "temp_range": [
+                20,
+                28
+            ],
+            "humidity_range": [
+                60,
+                85
+            ],
+            "ph_range": [
+                6.0,
+                7.0
+            ],
+            "rainfall_mm": 600,
+            "npk_preferred": [
+                120,
+                60,
+                60
+            ]
+        },
+        "market_data": {
+            "mandi_price": 3000,
+            "ai_price": 3124,
+            "trend": "up",
+            "change": "7.2%"
+        }
+    },
+    {
+        "id": 7,
+        "name_en": "Chilli",
+        "name_hi": "मिर्च",
+        "category": "Spices",
+        "icon": "🌶️",
+        "origin": "India",
+        "is_indian": true,
+        "growth_params": {
+            "temp_range": [
+                20,
+                30
+            ],
+            "humidity_range": [
+                50,
+                70
+            ],
+            "ph_range": [
+                6.5,
+                7.5
+            ],
+            "rainfall_mm": 800,
+            "npk_preferred": [
+                120,
+                60,
+                60
+            ]
+        },
+        "market_data": {
+            "mandi_price": 7500,
+            "ai_price": 7658,
+            "trend": "up",
+            "change": "6.7%"
+        }
+    },
+    {
+        "id": 8,
+        "name_en": "Mustard",
+        "name_hi": "सरसों",
+        "category": "Oilseeds",
+        "icon": "🌻",
+        "origin": "India",
+        "is_indian": true,
+        "growth_params": {
+            "temp_range": [
+                10,
+                25
+            ],
+            "humidity_range": [
+                40,
+                65
+            ],
+            "ph_range": [
+                6.0,
+                7.5
+            ],
+            "rainfall_mm": 400,
+            "npk_preferred": [
+                60,
+                40,
+                40
+            ]
+        },
+        "market_data": {
+            "mandi_price": 5450,
+            "ai_price": 5744,
+            "trend": "up",
+            "change": "3.3%"
+        }
+    },
+    {
+        "id": 9,
+        "name_en": "Sugarcane",
+        "name_hi": "गन्ना",
+        "category": "Cash Crop",
+        "icon": "🎋",
+        "origin": "India",
+        "is_indian": true,
+        "growth_params": {
+            "temp_range": [
+                20,
+                35
+            ],
+            "humidity_range": [
+                65,
+                90
+            ],
+            "ph_range": [
+                6.5,
+                7.5
+            ],
+            "rainfall_mm": 1500,
+            "npk_preferred": [
+                250,
+                100,
+                100
+            ]
+        },
+        "market_data": {
+            "mandi_price": 3150,
+            "ai_price": 3329,
+            "trend": "up",
+            "change": "5.8%"
+        }
+    },
+    {
+        "id": 10,
+        "name_en": "Cotton",
+        "name_hi": "कपास",
+        "category": "Commercial",
+        "icon": "☁️",
+        "origin": "India",
+        "is_indian": true,
+        "growth_params": {
+            "temp_range": [
+                25,
+                35
+            ],
+            "humidity_range": [
+                50,
+                80
+            ],
+            "ph_range": [
+                6.0,
+                8.0
+            ],
+            "rainfall_mm": 900,
+            "npk_preferred": [
+                120,
+                60,
+                60
+            ]
+        },
+        "market_data": {
+            "mandi_price": 6620,
+            "ai_price": 6565,
+            "trend": "up",
+            "change": "4.0%"
+        }
+    },
+    {
+        "id": 11,
+        "name_en": "Potato",
+        "name_hi": "आलू",
+        "category": "Vegetables",
+        "icon": "🥔",
+        "origin": "India",
+        "is_indian": true,
+        "growth_params": {
+            "temp_range": [
+                15,
+                25
+            ],
+            "humidity_range": [
+                60,
+                85
+            ],
+            "ph_range": [
+                5.5,
+                6.5
+            ],
+            "rainfall_mm": 500,
+            "npk_preferred": [
+                150,
+                100,
+                100
+            ]
+        },
+        "market_data": {
+            "mandi_price": 1800,
+            "ai_price": 1845,
+            "trend": "up",
+            "change": "1.4%"
+        }
+    },
+    {
+        "id": 12,
+        "name_en": "Chickpea (Chana)",
+        "name_hi": "चना",
+        "category": "Legumes",
+        "icon": "🫛",
+        "origin": "India",
+        "is_indian": true,
+        "growth_params": {
+            "temp_range": [
+                10,
+                25
+            ],
+            "humidity_range": [
+                40,
+                65
+            ],
+            "ph_range": [
+                6.0,
+                7.5
+            ],
+            "rainfall_mm": 400,
+            "npk_preferred": [
+                20,
+                60,
+                20
+            ]
+        },
+        "market_data": {
+            "mandi_price": 5335,
+            "ai_price": 5559,
+            "trend": "up",
+            "change": "2.4%"
+        }
+    },
+    {
+        "id": 13,
+        "name_en": "Moong Dal",
+        "name_hi": "मूंग दाल",
+        "category": "Legumes",
+        "icon": "🌿",
+        "origin": "India",
+        "is_indian": true,
+        "growth_params": {
+            "temp_range": [
+                25,
+                35
+            ],
+            "humidity_range": [
+                50,
+                80
+            ],
+            "ph_range": [
+                6.5,
+                7.5
+            ],
+            "rainfall_mm": 600,
+            "npk_preferred": [
+                20,
+                40,
+                20
+            ]
+        },
+        "market_data": {
+            "mandi_price": 8558,
+            "ai_price": 8596,
+            "trend": "up",
+            "change": "5.9%"
+        }
+    },
+    {
+        "id": 14,
+        "name_en": "Jowar",
+        "name_hi": "ज्वार",
+        "category": "Cereals",
+        "icon": "🌾",
+        "origin": "India",
+        "is_indian": true,
+        "growth_params": {
+            "temp_range": [
+                25,
+                35
+            ],
+            "humidity_range": [
+                40,
+                60
+            ],
+            "ph_range": [
+                6.0,
+                8.5
+            ],
+            "rainfall_mm": 450,
+            "npk_preferred": [
+                80,
+                40,
+                40
+            ]
+        },
+        "market_data": {
+            "mandi_price": 3180,
+            "ai_price": 3225,
+            "trend": "up",
+            "change": "2.3%"
+        }
+    },
+    {
+        "id": 15,
+        "name_en": "Bajra",
+        "name_hi": "बाजरा",
+        "category": "Cereals",
+        "icon": "🌾",
+        "origin": "India",
+        "is_indian": true,
+        "growth_params": {
+            "temp_range": [
+                25,
+                35
+            ],
+            "humidity_range": [
+                40,
+                60
+            ],
+            "ph_range": [
+                6.5,
+                8.0
+            ],
+            "rainfall_mm": 350,
+            "npk_preferred": [
+                60,
+                40,
+                20
+            ]
+        },
+        "market_data": {
+            "mandi_price": 2500,
+            "ai_price": 2416,
+            "trend": "up",
+            "change": "5.1%"
+        }
+    }
+]

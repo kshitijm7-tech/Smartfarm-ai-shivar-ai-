@@ -1,0 +1,24 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Image": {
+    "Name": "ACCOUNT_ID.dkr.ecr.REGION.amazonaws.com/smartfarm-backend:latest",
+    "Update": "true"
+  },
+  "Ports": [
+    {
+      "ContainerPort": 5000,
+      "HostPort": 5000
+    }
+  ],
+  "Logging": "/var/log/containers",
+  "Environment": [
+    {
+      "Name": "FLASK_ENV",
+      "Value": "production"
+    },
+    {
+      "Name": "SECRET_KEY",
+      "Value": "your-secret-key"
+    }
+  ]
+}

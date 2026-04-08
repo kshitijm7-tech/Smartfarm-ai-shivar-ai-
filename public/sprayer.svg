@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 280" width="400" height="280">
+  <defs>
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d1fae5"/>
+      <stop offset="100%" stop-color="#a7f3d0"/>
+    </linearGradient>
+    <linearGradient id="tankGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4ade80"/>
+      <stop offset="100%" stop-color="#15803d"/>
+    </linearGradient>
+    <linearGradient id="tankHighlight" x1="0%" y1="0%" x2="40%" y2="100%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.3)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="400" height="280" fill="url(#skyGrad)" rx="12"/>
+  <!-- Ground strip -->
+  <rect x="0" y="230" width="400" height="50" fill="#86efac" rx="0"/>
+  <rect x="0" y="240" width="400" height="40" fill="#4ade80" rx="0"/>
+  <!-- Small grass -->
+  <ellipse cx="60" cy="240" rx="30" ry="8" fill="#22c55e"/>
+  <ellipse cx="340" cy="240" rx="25" ry="7" fill="#22c55e"/>
+
+  <!-- === KNAPSACK SPRAYER === -->
+  <!-- Harness straps (behind tank) -->
+  <rect x="142" y="80" width="14" height="130" rx="7" fill="#374151"/>
+  <rect x="244" y="80" width="14" height="130" rx="7" fill="#374151"/>
+  <!-- Shoulder cross strap -->
+  <path d="M142 105 Q180 120 244 105" fill="none" stroke="#4b5563" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- Tank body -->
+  <rect x="150" y="55" width="100" height="160" rx="22" fill="url(#tankGrad)" stroke="#166534" stroke-width="3"/>
+  <!-- Tank highlight -->
+  <rect x="155" y="60" width="100" height="155" rx="20" fill="url(#tankHighlight)"/>
+  <!-- Tank ribs -->
+  <rect x="150" y="110" width="100" height="6" rx="3" fill="rgba(0,0,0,0.12)"/>
+  <rect x="150" y="140" width="100" height="6" rx="3" fill="rgba(0,0,0,0.12)"/>
+  <rect x="150" y="170" width="100" height="6" rx="3" fill="rgba(0,0,0,0.12)"/>
+
+  <!-- Tank cap/lid -->
+  <ellipse cx="200" cy="55" rx="30" ry="10" fill="#166534" stroke="#14532d" stroke-width="2"/>
+  <ellipse cx="200" cy="50" rx="18" ry="7" fill="#1a7a3c"/>
+  <rect x="194" y="38" width="12" height="14" rx="4" fill="#374151"/>
+
+  <!-- Label on tank -->
+  <rect x="163" y="72" width="74" height="46" rx="8" fill="white" opacity="0.9" stroke="#d1fae5" stroke-width="1"/>
+  <text x="200" y="91" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#065f46">NEPTUNE</text>
+  <text x="200" y="104" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#166534">16 LITRE</text>
+  <text x="200" y="114" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#6b7280">AGRI SPRAYER</text>
+
+  <!-- Water level window -->
+  <rect x="175" y="127" width="50" height="22" rx="6" fill="rgba(0,0,0,0.2)" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+  <rect x="177" y="129" width="36" height="18" rx="4" fill="rgba(56,189,248,0.5)"/>
+  <text x="200" y="142" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="white" font-weight="bold">80%</text>
+
+  <!-- Pump handle (right side) -->
+  <rect x="250" y="85" width="14" height="60" rx="7" fill="#374151" stroke="#1f2937" stroke-width="2"/>
+  <rect x="246" y="82" width="22" height="12" rx="6" fill="#4b5563"/>
+  <rect x="246" y="133" width="22" height="12" rx="6" fill="#4b5563"/>
+
+  <!-- Hose connector -->
+  <rect x="247" y="155" width="16" height="10" rx="4" fill="#1f2937"/>
+  <!-- Hose pipe -->
+  <path d="M255 165 Q285 175 290 200 Q295 225 272 228" fill="none" stroke="#374151" stroke-width="9" stroke-linecap="round"/>
+  <path d="M255 165 Q285 175 290 200 Q295 225 272 228" fill="none" stroke="#4b5563" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- Spray gun handle -->
+  <rect x="258" y="222" width="36" height="14" rx="7" fill="#1f2937"/>
+  <rect x="264" y="218" width="12" height="22" rx="5" fill="#374151"/>
+  <!-- Nozzle -->
+  <rect x="290" y="225" width="28" height="8" rx="4" fill="#6b7280"/>
+  <path d="M318 222 L332 218 L332 236 L318 233 Z" fill="#9ca3af"/>
+  <!-- Spray mist -->
+  <circle cx="338" cy="220" r="3" fill="#bae6fd" opacity="0.8"/>
+  <circle cx="344" cy="225" r="2" fill="#bae6fd" opacity="0.7"/>
+  <circle cx="340" cy="232" r="2.5" fill="#bae6fd" opacity="0.6"/>
+  <circle cx="348" cy="218" r="1.5" fill="#bae6fd" opacity="0.5"/>
+  <circle cx="349" cy="228" r="2" fill="#bae6fd" opacity="0.6"/>
+
+  <!-- Brand badge top -->
+  <rect x="135" y="18" width="130" height="28" rx="14" fill="#166534"/>
+  <text x="200" y="35" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="white">Knapsack Sprayer</text>
+</svg>

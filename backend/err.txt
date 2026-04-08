@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "c:\Users\ARYAN - AYUSH\Downloads\SmartFarmAiT1b1.0\SmartFarmAiT1\backend\app.py", line 12, in <module>
+    from ai_interface import (
+    ...<2 lines>...
+    )
+ImportError: cannot import name 'get_ndvi_score' from 'ai_interface' (c:\Users\ARYAN - AYUSH\Downloads\SmartFarmAiT1b1.0\SmartFarmAiT1\backend\ai_interface.py)

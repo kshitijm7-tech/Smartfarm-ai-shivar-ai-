@@ -1,0 +1,11 @@
+$src = "C:\Users\Vipul Bhamare\.gemini\antigravity\brain\1c39d706-1b22-487e-8042-d0477fb9c2b7"
+$dst = "C:\Users\Vipul Bhamare\.gemini\antigravity\scratch\smartfarm-app\public"
+
+Copy-Item "$src\produce_wheat_1772551460073.png" "$dst\produce_wheat.png"
+Copy-Item "$src\produce_tomato_1772551480524.png" "$dst\produce_tomato.png"
+Copy-Item "$src\produce_chilli_1772551499018.png" "$dst\produce_chilli.png"
+Copy-Item "$src\produce_soybean_1772551522581.png" "$dst\produce_soybean.png"
+Copy-Item "$src\produce_jaggery_1772551541587.png" "$dst\produce_jaggery.png"
+Copy-Item "$src\produce_onion_1772551560574.png" "$dst\produce_onion.png"
+Copy-Item "$src\produce_rice_1772551581000.png" "$dst\produce_rice.png"
+Copy-Item "$src\produce_turmeric_1772551603758.png" "$dst\produce_turmeric.png"

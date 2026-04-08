@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 280" width="400" height="280">
+  <defs>
+    <linearGradient id="skyD" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f0f9ff"/>
+      <stop offset="100%" stop-color="#e0f2fe"/>
+    </linearGradient>
+    <linearGradient id="soilD" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#92400e"/>
+      <stop offset="100%" stop-color="#78350f"/>
+    </linearGradient>
+    <linearGradient id="pipeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#60a5fa"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+    <linearGradient id="dropGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7dd3fc"/>
+      <stop offset="100%" stop-color="#0ea5e9"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background sky -->
+  <rect width="400" height="280" fill="url(#skyD)" rx="12"/>
+
+  <!-- Sun -->
+  <circle cx="360" cy="45" r="28" fill="#fef08a" opacity="0.8"/>
+  <circle cx="360" cy="45" r="20" fill="#fde047"/>
+  <!-- Sun rays -->
+  <line x1="360" y1="8" x2="360" y2="2" stroke="#fde047" stroke-width="3" stroke-linecap="round"/>
+  <line x1="388" y1="17" x2="392" y2="13" stroke="#fde047" stroke-width="3" stroke-linecap="round"/>
+  <line x1="396" y1="45" x2="402" y2="45" stroke="#fde047" stroke-width="3" stroke-linecap="round"/>
+  <line x1="388" y1="72" x2="392" y2="76" stroke="#fde047" stroke-width="3" stroke-linecap="round"/>
+  <line x1="332" y1="17" x2="328" y2="13" stroke="#fde047" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Soil / Ground -->
+  <path d="M0 195 Q80 188 200 193 Q320 198 400 190 L400 280 L0 280 Z" fill="url(#soilD)"/>
+  <!-- Soil surface grass -->
+  <rect x="0" y="192" width="400" height="8" fill="#65a30d" rx="0"/>
+
+  <!-- == MAIN HEADER PIPE == -->
+  <rect x="30" y="100" width="340" height="22" rx="11" fill="url(#pipeGrad)" stroke="#1d4ed8" stroke-width="2"/>
+  <!-- Pipe shine -->
+  <rect x="32" y="102" width="336" height="7" rx="5" fill="rgba(255,255,255,0.3)"/>
+
+  <!-- Filter/connector unit on left -->
+  <rect x="18" y="95" width="30" height="32" rx="8" fill="#1d4ed8" stroke="#1e40af" stroke-width="2"/>
+  <rect x="22" y="100" width="22" height="22" rx="4" fill="#2563eb"/>
+  <circle cx="33" cy="111" r="6" fill="#bfdbfe"/>
+  <!-- Inlet label -->
+  <text x="33" y="140" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#1d4ed8" font-weight="bold">INLET</text>
+  <rect x="23" y="127" width="20" height="1" fill="#93c5fd"/>
+
+  <!-- == DRIP LINES (vertical) == -->
+  <!-- Line 1 -->
+  <rect x="95" y="120" width="10" height="75" rx="5" fill="#60a5fa" stroke="#3b82f6" stroke-width="1"/>
+  <!-- Emitter 1 -->
+  <rect x="89" y="119" width="22" height="12" rx="5" fill="#dc2626" stroke="#b91c1c" stroke-width="1"/>
+  <!-- Water drops 1 -->
+  <path d="M100 195 Q100 208 94 215 Q100 219 106 215 Q100 208 100 195" fill="url(#dropGrad)"/>
+  <path d="M100 218 Q100 226 96 230 Q100 232 104 230 Q100 226 100 218" fill="url(#dropGrad)" opacity="0.6"/>
+
+  <!-- Line 2 -->
+  <rect x="165" y="120" width="10" height="75" rx="5" fill="#60a5fa" stroke="#3b82f6" stroke-width="1"/>
+  <!-- Emitter 2 -->
+  <rect x="159" y="119" width="22" height="12" rx="5" fill="#dc2626" stroke="#b91c1c" stroke-width="1"/>
+  <!-- Water drops 2 -->
+  <path d="M170 195 Q170 208 164 215 Q170 219 176 215 Q170 208 170 195" fill="url(#dropGrad)"/>
+  <path d="M170 218 Q170 226 166 230 Q170 232 174 230 Q170 226 170 218" fill="url(#dropGrad)" opacity="0.6"/>
+
+  <!-- Line 3 -->
+  <rect x="235" y="120" width="10" height="75" rx="5" fill="#60a5fa" stroke="#3b82f6" stroke-width="1"/>
+  <!-- Emitter 3 -->
+  <rect x="229" y="119" width="22" height="12" rx="5" fill="#dc2626" stroke="#b91c1c" stroke-width="1"/>
+  <!-- Water drops 3 -->
+  <path d="M240 195 Q240 208 234 215 Q240 219 246 215 Q240 208 240 195" fill="url(#dropGrad)"/>
+
+  <!-- Line 4 -->
+  <rect x="305" y="120" width="10" height="75" rx="5" fill="#60a5fa" stroke="#3b82f6" stroke-width="1"/>
+  <!-- Emitter 4 -->
+  <rect x="299" y="119" width="22" height="12" rx="5" fill="#dc2626" stroke="#b91c1c" stroke-width="1"/>
+  <!-- Water drops 4 -->
+  <path d="M310 195 Q310 208 304 215 Q310 219 316 215 Q310 208 310 195" fill="url(#dropGrad)"/>
+
+  <!-- == PLANTS == -->
+  <!-- Plant 1 under line 1 -->
+  <rect x="99" y="220" width="4" height="30" rx="2" fill="#65a30d"/>
+  <path d="M101 225 Q85 210 90 200 Q108 215 101 225" fill="#22c55e"/>
+  <path d="M101 232 Q118 218 113 207 Q95 222 101 232" fill="#16a34a"/>
+  <ellipse cx="100" cy="250" rx="12" ry="4" fill="#4ade80" opacity="0.4"/>
+
+  <!-- Plant 2 under line 2 -->
+  <rect x="169" y="218" width="4" height="32" rx="2" fill="#65a30d"/>
+  <path d="M171 222 Q154 207 159 197 Q177 213 171 222" fill="#22c55e"/>
+  <path d="M171 230 Q188 215 183 204 Q165 220 171 230" fill="#16a34a"/>
+  <ellipse cx="170" cy="250" rx="12" ry="4" fill="#4ade80" opacity="0.4"/>
+
+  <!-- Plant 3 under line 3 -->
+  <rect x="239" y="222" width="4" height="28" rx="2" fill="#65a30d"/>
+  <path d="M241 226 Q224 212 229 202 Q247 217 241 226" fill="#22c55e"/>
+  <ellipse cx="240" cy="250" rx="11" ry="4" fill="#4ade80" opacity="0.4"/>
+
+  <!-- Plant 4 under line 4 -->
+  <rect x="309" y="220" width="4" height="30" rx="2" fill="#65a30d"/>
+  <path d="M311 224 Q294 210 299 200 Q317 215 311 224" fill="#22c55e"/>
+  <path d="M311 232 Q328 218 323 207 Q305 222 311 232" fill="#16a34a"/>
+  <ellipse cx="310" cy="250" rx="12" ry="4" fill="#4ade80" opacity="0.4"/>
+
+  <!-- Brand label on pipe -->
+  <rect x="120" y="103" width="160" height="16" rx="8" fill="rgba(255,255,255,0.2)"/>
+  <text x="200" y="115" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="white">JAIN IRRIGATION • DRIP KIT 1 ACRE</text>
+
+  <!-- Top badge -->
+  <rect x="130" y="18" width="140" height="28" rx="14" fill="#0369a1"/>
+  <text x="200" y="35" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="white">Mini Drip Kit 1 Acre</text>
+</svg>
