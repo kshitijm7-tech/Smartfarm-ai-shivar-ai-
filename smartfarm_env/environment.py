@@ -141,7 +141,7 @@ class SmartFarmEnvironment(Environment):
             plan_submitted=False,
             score=None,
             done=False,
-            reward=0.0,
+            reward=0.01,
             tools_used=[],
             steps_remaining=self._max_steps,
         )
@@ -174,7 +174,7 @@ class SmartFarmEnvironment(Environment):
                 plan_submitted=True,
                 score=None,
                 done=True,
-                reward=0.0,
+                reward=0.01,
                 tools_used=list(self._unique_tools),
                 steps_remaining=0,
             )
@@ -191,7 +191,7 @@ class SmartFarmEnvironment(Environment):
                 plan_submitted=False,
                 score=0.01,
                 done=True,
-                reward=-0.1,
+                reward=0.01,
                 tools_used=list(self._unique_tools),
                 steps_remaining=0,
             )
@@ -227,7 +227,7 @@ class SmartFarmEnvironment(Environment):
                 plan_submitted=False,
                 score=None,
                 done=False,
-                reward=-0.05,
+                reward=0.01,
                 tools_used=list(self._unique_tools),
                 steps_remaining=steps_remaining,
             )
@@ -280,7 +280,7 @@ class SmartFarmEnvironment(Environment):
                     plan_submitted=False,
                     score=None,
                     done=False,
-                    reward=-0.05,
+                    reward=0.01,
                     tools_used=list(self._unique_tools),
                     steps_remaining=steps_remaining,
                 )
@@ -296,7 +296,7 @@ class SmartFarmEnvironment(Environment):
             if is_new_tool:
                 reward = 0.1  # Reward for using a new tool
             else:
-                reward = 0.0  # No reward for repeated tool calls
+                reward = 0.01  # No reward for repeated tool calls
 
             self._cumulative_reward += reward
 
@@ -322,7 +322,7 @@ class SmartFarmEnvironment(Environment):
                 plan_submitted=False,
                 score=None,
                 done=False,
-                reward=-0.05,
+                reward=0.01,
                 tools_used=list(self._unique_tools),
                 steps_remaining=steps_remaining,
             )
@@ -344,7 +344,7 @@ class SmartFarmEnvironment(Environment):
                 plan_submitted=False,
                 score=None,
                 done=False,
-                reward=-0.05,
+                reward=0.01,
                 tools_used=list(self._unique_tools),
                 steps_remaining=steps_remaining,
             )

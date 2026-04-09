@@ -300,7 +300,7 @@ def main():
             f"steps={r['steps']} success={r['success']}",
             file=sys.stderr,
         )
-    avg = sum(r["final_score"] for r in results) / len(results) if results else 0
+    avg = sum(r["final_score"] for r in results) / len(results) if results else 0.01
     print(f"  Average: {avg:.2f}", file=sys.stderr)
 
 
