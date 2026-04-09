@@ -89,7 +89,7 @@ def grade_soil_health_report(
     quality_score = (length_score * 0.6 + (0.4 if has_recommendation else 0.0)) * 0.30
 
     total = round(min(tool_score + keyword_score + quality_score, 1.0), 2)
-    return total
+    return max(0.01, min(total, 0.99))
 
 
 # ══════════════════════════════════════════════════════════════════════
@@ -139,7 +139,7 @@ def grade_crop_selection(
     finance_score = _check_keywords(plan, finance_keywords) * 0.15
 
     total = round(min(tool_score + soil_score + risk_score + crop_total + finance_score, 1.0), 2)
-    return total
+    return max(0.01, min(total, 0.99))
 
 
 # ══════════════════════════════════════════════════════════════════════
@@ -208,7 +208,7 @@ def grade_full_farm_plan(
     detail_total = action_score + length_score
 
     total = round(min(tool_score + completeness + risk_score + finance_score + detail_total, 1.0), 2)
-    return total
+    return max(0.01, min(total, 0.99))
 
 
 # ══════════════════════════════════════════════════════════════════════
