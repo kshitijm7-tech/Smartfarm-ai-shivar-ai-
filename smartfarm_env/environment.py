@@ -189,7 +189,7 @@ class SmartFarmEnvironment(Environment):
                 tool_result=None,
                 last_action_error="Maximum steps exceeded. Episode terminated.",
                 plan_submitted=False,
-                score=0.0,
+                score=0.01,
                 done=True,
                 reward=-0.1,
                 tools_used=list(self._unique_tools),
