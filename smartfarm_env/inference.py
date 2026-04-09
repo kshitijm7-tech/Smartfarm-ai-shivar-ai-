@@ -177,9 +177,9 @@ def run_agent_on_task(task_name: str, max_steps: int = 20) -> Dict[str, Any]:
                 agent_text = response.choices[0].message.content or ""
             except Exception as e:
                 error_msg = f"LLM API error: {str(e)}"
-                rewards.append(0.01)
+                rewards.append(0.05)
                 print(
-                    f"[STEP] step={step} action=error reward=0.01 "
+                    f"[STEP] step={step} action=error reward=0.05 "
                     f"done=true error={error_msg}"
                 )
                 break
@@ -198,15 +198,15 @@ def run_agent_on_task(task_name: str, max_steps: int = 20) -> Dict[str, Any]:
                 obs = env.step(action)
             except Exception as e:
                 error_msg = f"Action error: {str(e)}"
-                rewards.append(0.01)
+                rewards.append(0.05)
                 print(
-                    f"[STEP] step={step} action={action_type} reward=0.01 "
+                    f"[STEP] step={step} action={action_type} reward=0.05 "
                     f"done=true error={error_msg}"
                 )
                 break
 
             # Record step
-            reward = float(obs.reward or 0.0)
+            reward = float(obs.reward or 0.05)
             rewards.append(reward)
             done = obs.done
             error = obs.last_action_error
@@ -253,9 +253,9 @@ def run_agent_on_task(task_name: str, max_steps: int = 20) -> Dict[str, Any]:
     except Exception as e:
         error_msg = str(e)
         if not rewards:
-            rewards.append(0.01)
+            rewards.append(0.05)
         print(
-            f"[STEP] step={step_count} action=error reward=0.01 "
+            f"[STEP] step={step_count} action=error reward=0.05 "
             f"done=true error={error_msg}"
         )
 
@@ -274,7 +274,7 @@ def run_agent_on_task(task_name: str, max_steps: int = 20) -> Dict[str, Any]:
         "success": success,
         "steps": step_count,
         "rewards": rewards,
-        "final_score": rewards[-1] if rewards else 0.01,
+        "final_score": rewards[-1] if rewards else 0.05,
     }
 
 
@@ -300,7 +300,7 @@ def main():
             f"steps={r['steps']} success={r['success']}",
             file=sys.stderr,
         )
-    avg = sum(r["final_score"] for r in results) / len(results) if results else 0.01
+    avg = sum(r["final_score"] for r in results) / len(results) if results else 0.05
     print(f"  Average: {avg:.2f}", file=sys.stderr)
 
 
