@@ -177,9 +177,9 @@ def run_agent_on_task(task_name: str, max_steps: int = 20) -> Dict[str, Any]:
                 agent_text = response.choices[0].message.content or ""
             except Exception as e:
                 error_msg = f"LLM API error: {str(e)}"
-                rewards.append(0.0)
+                rewards.append(0.01)
                 print(
-                    f"[STEP] step={step} action=error reward=0.00 "
+                    f"[STEP] step={step} action=error reward=0.01 "
                     f"done=true error={error_msg}"
                 )
                 break
@@ -198,9 +198,9 @@ def run_agent_on_task(task_name: str, max_steps: int = 20) -> Dict[str, Any]:
                 obs = env.step(action)
             except Exception as e:
                 error_msg = f"Action error: {str(e)}"
-                rewards.append(0.0)
+                rewards.append(0.01)
                 print(
-                    f"[STEP] step={step} action={action_type} reward=0.00 "
+                    f"[STEP] step={step} action={action_type} reward=0.01 "
                     f"done=true error={error_msg}"
                 )
                 break
@@ -253,9 +253,9 @@ def run_agent_on_task(task_name: str, max_steps: int = 20) -> Dict[str, Any]:
     except Exception as e:
         error_msg = str(e)
         if not rewards:
-            rewards.append(0.0)
+            rewards.append(0.01)
         print(
-            f"[STEP] step={step_count} action=error reward=0.00 "
+            f"[STEP] step={step_count} action=error reward=0.01 "
             f"done=true error={error_msg}"
         )
 
@@ -274,7 +274,7 @@ def run_agent_on_task(task_name: str, max_steps: int = 20) -> Dict[str, Any]:
         "success": success,
         "steps": step_count,
         "rewards": rewards,
-        "final_score": rewards[-1] if rewards else 0.0,
+        "final_score": rewards[-1] if rewards else 0.01,
     }
 
 
