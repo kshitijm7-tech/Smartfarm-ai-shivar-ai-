@@ -177,9 +177,9 @@ def run_agent_on_task(task_name: str, max_steps: int = 20) -> Dict[str, Any]:
                 agent_text = response.choices[0].message.content or ""
             except Exception as e:
                 error_msg = f"LLM API error: {str(e)}"
-                rewards.append(0.05)
+                rewards.append(0.1)
                 print(
-                    f"[STEP] step={step} action=error reward=0.05 "
+                    f"[STEP] step={step} action=error reward=0.1 "
                     f"done=true error={error_msg}"
                 )
                 break
@@ -198,15 +198,15 @@ def run_agent_on_task(task_name: str, max_steps: int = 20) -> Dict[str, Any]:
                 obs = env.step(action)
             except Exception as e:
                 error_msg = f"Action error: {str(e)}"
-                rewards.append(0.05)
+                rewards.append(0.1)
                 print(
-                    f"[STEP] step={step} action={action_type} reward=0.05 "
+                    f"[STEP] step={step} action={action_type} reward=0.1 "
                     f"done=true error={error_msg}"
                 )
                 break
 
             # Record step
-            reward = float(obs.reward or 0.05)
+            reward = float(obs.reward or 0.1)
             rewards.append(reward)
             done = obs.done
             error = obs.last_action_error
@@ -220,7 +220,7 @@ def run_agent_on_task(task_name: str, max_steps: int = 20) -> Dict[str, Any]:
 
             print(
                 f"[STEP] step={step} action={action_str} "
-                f"reward={reward:.2f} done={str(done).lower()} "
+                f"reward={reward:.1f} done={str(done).lower()} "
                 f"error={error if error else 'null'}"
             )
 
@@ -253,9 +253,9 @@ def run_agent_on_task(task_name: str, max_steps: int = 20) -> Dict[str, Any]:
     except Exception as e:
         error_msg = str(e)
         if not rewards:
-            rewards.append(0.05)
+            rewards.append(0.1)
         print(
-            f"[STEP] step={step_count} action=error reward=0.05 "
+            f"[STEP] step={step_count} action=error reward=0.1 "
             f"done=true error={error_msg}"
         )
 
@@ -263,7 +263,7 @@ def run_agent_on_task(task_name: str, max_steps: int = 20) -> Dict[str, Any]:
         env.close()
 
     # Print END line
-    rewards_str = ",".join(f"{r:.2f}" for r in rewards)
+    rewards_str = ",".join(f"{r:.1f}" for r in rewards)
     print(
         f"[END] success={str(success).lower()} steps={step_count} "
         f"rewards={rewards_str}"
@@ -274,7 +274,7 @@ def run_agent_on_task(task_name: str, max_steps: int = 20) -> Dict[str, Any]:
         "success": success,
         "steps": step_count,
         "rewards": rewards,
-        "final_score": rewards[-1] if rewards else 0.05,
+        "final_score": rewards[-1] if rewards else 0.1,
     }
 
 
@@ -300,8 +300,8 @@ def main():
             f"steps={r['steps']} success={r['success']}",
             file=sys.stderr,
         )
-    avg = sum(r["final_score"] for r in results) / len(results) if results else 0.05
-    print(f"  Average: {avg:.2f}", file=sys.stderr)
+    avg = sum(r["final_score"] for r in results) / len(results) if results else 0.1
+    print(f"  Average: {avg:.1f}", file=sys.stderr)
 
 
 if __name__ == "__main__":

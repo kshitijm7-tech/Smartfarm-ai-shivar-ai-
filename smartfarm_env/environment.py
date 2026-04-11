@@ -139,9 +139,9 @@ class SmartFarmEnvironment(Environment):
             tool_result=None,
             last_action_error=None,
             plan_submitted=False,
-            score=0.05,
+            score=0.1,
             done=False,
-            reward=0.05,
+            reward=0.1,
             tools_used=[],
             steps_remaining=self._max_steps,
         )
@@ -172,9 +172,9 @@ class SmartFarmEnvironment(Environment):
                 tool_result=None,
                 last_action_error="Episode is already done. Call reset() to start a new episode.",
                 plan_submitted=True,
-                score=0.05,
+                score=0.1,
                 done=True,
-                reward=0.05,
+                reward=0.1,
                 tools_used=list(self._unique_tools),
                 steps_remaining=0,
             )
@@ -189,9 +189,9 @@ class SmartFarmEnvironment(Environment):
                 tool_result=None,
                 last_action_error="Maximum steps exceeded. Episode terminated.",
                 plan_submitted=False,
-                score=0.05,
+                score=0.1,
                 done=True,
-                reward=0.05,
+                reward=0.1,
                 tools_used=list(self._unique_tools),
                 steps_remaining=0,
             )
@@ -225,9 +225,9 @@ class SmartFarmEnvironment(Environment):
                 tool_result=None,
                 last_action_error=f"Unknown action type: {action_type}",
                 plan_submitted=False,
-                score=0.05,
+                score=0.1,
                 done=False,
-                reward=0.05,
+                reward=0.1,
                 tools_used=list(self._unique_tools),
                 steps_remaining=steps_remaining,
             )
@@ -278,9 +278,9 @@ class SmartFarmEnvironment(Environment):
                     tool_result=result,
                     last_action_error=result["error"],
                     plan_submitted=False,
-                    score=0.05,
+                    score=0.1,
                     done=False,
-                    reward=0.05,
+                    reward=0.1,
                     tools_used=list(self._unique_tools),
                     steps_remaining=steps_remaining,
                 )
@@ -296,7 +296,7 @@ class SmartFarmEnvironment(Environment):
             if is_new_tool:
                 reward = 0.1  # Reward for using a new tool
             else:
-                reward = 0.05  # No reward for repeated tool calls
+                reward = 0.1  # No reward for repeated tool calls
 
             self._cumulative_reward += reward
 
@@ -306,7 +306,7 @@ class SmartFarmEnvironment(Environment):
                 tool_result=result,
                 last_action_error=None,
                 plan_submitted=False,
-                score=0.05,
+                score=0.1,
                 done=False,
                 reward=reward,
                 tools_used=list(self._unique_tools),
@@ -320,9 +320,9 @@ class SmartFarmEnvironment(Environment):
                 tool_result=None,
                 last_action_error=f"Tool execution error: {str(exc)}",
                 plan_submitted=False,
-                score=0.05,
+                score=0.1,
                 done=False,
-                reward=0.05,
+                reward=0.1,
                 tools_used=list(self._unique_tools),
                 steps_remaining=steps_remaining,
             )
@@ -342,9 +342,9 @@ class SmartFarmEnvironment(Environment):
                 tool_result=None,
                 last_action_error="Plan cannot be empty. Provide a 'plan' parameter with your report.",
                 plan_submitted=False,
-                score=0.05,
+                score=0.1,
                 done=False,
-                reward=0.05,
+                reward=0.1,
                 tools_used=list(self._unique_tools),
                 steps_remaining=steps_remaining,
             )
