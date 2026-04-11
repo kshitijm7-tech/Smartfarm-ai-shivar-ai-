@@ -244,8 +244,8 @@ class SmartFarmEnvironment(Environment):
             result = tool_fn(**params)
             self._tool_results.append({"tool": tool_name, "result": result})
 
-            # Tiny intermediate reward (0.01)
-            reward = 0.01
+            # SHAPING: Give higher reward for first-time use of useful tools
+            reward = 0.05 if is_new_tool else 0.02
             self._cumulative_extra_reward += reward
 
             return SmartFarmObservation(
@@ -261,9 +261,9 @@ class SmartFarmEnvironment(Environment):
                 steps_remaining=steps_remaining,
             )
         except Exception as e:
-            # Handle tool execution errors (return baseline reward)
+            # Handle tool execution errors (return tiny baseline reward)
             result = {"error": str(e)}
-            reward = 0.01
+            reward = 0.02
             self._cumulative_extra_reward += reward
             return SmartFarmObservation(
                 task_description=None,
@@ -277,6 +277,7 @@ class SmartFarmEnvironment(Environment):
                 tools_used=list(self._unique_tools),
                 steps_remaining=steps_remaining,
             )
+
 
     def _handle_submit_plan(
         self,

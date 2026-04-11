@@ -14,22 +14,19 @@ tags:
 
 A real-world farm management RL environment for the [Meta OpenEnv Hackathon](https://github.com/meta-pytorch/OpenEnv). Agents interact with agricultural tools to solve farming advisory tasks — from simple soil analysis to comprehensive farm management planning.
 
-## 🎯 Motivation
-
-Farmers in India and worldwide face daily decisions about soil management, crop selection, disease prevention, and risk mitigation. This environment simulates these real-world tasks, challenging AI agents to gather data using agricultural tools and produce actionable farm management plans.
-
-Unlike toy environments, every task maps to a decision a real agricultural advisor makes — analyzing soil health, choosing the right crop for local conditions, and planning against environmental risks.
-
 ## 🏗️ Environment Overview
 
-| Component | Description |
+SmartFarm OpenEnv is a highly structured Reinforcement Learning environment designed to train and evaluate agents on complex, multi-tool agricultural advisory tasks. 
+
+| Component | Specification |
 |-----------|-------------|
-| **Interface** | OpenEnv-compliant (reset/step/state) |
-| **Runtime** | FastAPI server via `openenv.core.env_server` |
-| **Actions** | 5 action types (4 tools + plan submission) |
-| **Observations** | Tool results, task descriptions, scores |
-| **Rewards** | Incremental (+0.1 per tool) + final graded score |
-| **Tasks** | 3 tasks (easy → hard) |
+| **Interface** | Full OpenEnv Spec (reset/step/state) |
+| **Logic** | Deterministic agricultural tool simulations |
+| **Actions** | typed `SmartFarmAction` (Model-based) |
+| **Observations** | typed `SmartFarmObservation` (Pydantic) |
+| **Rewards** | Shaping for partial progress + Balancing for range safety |
+| **Tasks** | 3 tasks (Easy → Medium → Hard) |
+
 
 ## 📋 Action Space
 
@@ -58,25 +55,26 @@ The agent can perform these actions via `SmartFarmAction`:
 | `done` | `bool` | Whether episode has ended |
 | `reward` | `float` | Reward for the current step |
 
-## 🎮 Tasks
+## 🎮 Tasks & Difficulty Progression
+
+| Task Name | Difficulty | Expected Signal | Required Tools |
+|-----------|------------|-----------------|----------------|
+| `soil_health_report` | **Easy** | Baseline soil state | `analyze_soil` |
+| `crop_selection` | **Medium** | Soil + Weather + Market | `analyze_soil`, `assess_risk`, `recommend_crop` |
+| `full_farm_plan` | **Hard** | Holistic optimization | All 4 Tools |
 
 ### Task 1: Soil Health Report (Easy)
-- **Objective**: Analyze soil at Pune coordinates and produce a health summary
-- **Required Tools**: `analyze_soil`
-- **Max Steps**: 10
-- **Grading**: Tool usage (30%) + Key metrics mentioned (40%) + Report quality (30%)
+- **Objective**: Analyze soil at specific coordinates and produce a structured health report.
+- **Grading**: Tool usage (30%) + Metric accuracy (40%) + Formatting (30%).
 
 ### Task 2: Crop Selection (Medium)
-- **Objective**: Recommend a crop for Nashik given constraints (season, budget, water)
-- **Required Tools**: `analyze_soil`, `assess_risk`, `recommend_crop`
-- **Max Steps**: 15
-- **Grading**: Tool usage (20%) + Soil analysis (20%) + Risk awareness (20%) + Crop recommendation (25%) + Financial (15%)
+- **Objective**: Match the best crop to a specific parcel of land based on soil, budget, and local season.
+- **Grading**: Constraints matching (40%) + Rationale (30%) + Risk awareness (30%).
 
 ### Task 3: Full Farm Plan (Hard)
-- **Objective**: Create a comprehensive management plan for a Punjab farm
-- **Required Tools**: All 4 tools
-- **Max Steps**: 20
-- **Grading**: Tool usage (20%) + Plan completeness (30%) + Risk awareness (15%) + Financial viability (15%) + Actionability (20%)
+- **Objective**: Create a seasonal management rotation for a large farm parcel.
+- **Grading**: Completeness (30%) + Scientific accuracy (30%) + Actionability (40%).
+
 
 ## 🚀 Setup & Usage
 

@@ -69,7 +69,7 @@ async def validation_exception_handler(request: Request, exc: ValidationError):
             },
             "reward": 0.01,
             "done": True,
-            "metadata": {"error": "validation_failure"}
+            "info": {"error": "validation_failure"}
         },
     )
 
@@ -93,9 +93,10 @@ async def global_exception_handler(request: Request, exc: Exception):
             },
             "reward": 0.01,
             "done": True,
-            "metadata": {"error": "internal_failure"}
+            "info": {"error": "internal_failure"}
         },
     )
+
 
 
 def main(host: str = "0.0.0.0", port: int | None = None):

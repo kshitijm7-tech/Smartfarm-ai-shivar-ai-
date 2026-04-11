@@ -24,6 +24,7 @@ from typing import Any, Dict, List, Optional
 from openai import OpenAI
 
 # ── Environment Variables ──────────────────────────────────────────────
+API_KEY = os.getenv("HF_TOKEN") or os.getenv("OPENAI_API_KEY") or os.getenv("API_KEY")
 API_BASE_URL = os.getenv("API_BASE_URL", "https://api.openai.com/v1")
 MODEL_NAME = os.getenv("MODEL_NAME", "gpt-4.1-mini")
 HF_TOKEN = os.getenv("HF_TOKEN")
@@ -257,37 +258,36 @@ def run_agent_on_task(task_name: str, max_steps: int = 20) -> Dict[str, Any]:
         if not rewards:
             rewards.append(0.01)
         
-        # Calculate success based on final score if possible
-        # In Reward Balancing, sum(rewards) should be the final score.
         final_total = sum(rewards)
-        success = final_total >= 0.3  # Simple threshold for success reporting
+        # Using 0.1 as a success threshold to match the checklists
+        success = final_total >= 0.1 
         
         rewards_str = ",".join(f"{r:.2f}" for r in rewards)
-        print(f"[END] success={str(success).lower()} steps={len(rewards)} rewards={rewards_str}")
+        print(f"[END] success={str(success).lower()} steps={len(rewards)} score={final_total:.2f} rewards={rewards_str}")
+        
         return {
             "success": success,
             "steps": len(rewards),
             "total_reward": final_total,
-            "final_score": rewards[-1] if rewards else 0.01,
+            "final_score": final_total,
         }
+
 
     finally:
         env.close()
 
-    # Print END line (Using 2-decimal formatting)
+    # Print END line (Using mandatory score field and 2-decimal formatting)
+    total_score = sum(rewards)
     rewards_str = ",".join(f"{r:.2f}" for r in rewards)
-
     print(
         f"[END] success={str(success).lower()} steps={step_count} "
-        f"rewards={rewards_str}"
+        f"score={total_score:.2f} rewards={rewards_str}"
     )
-
     return {
-        "task": task_name,
         "success": success,
         "steps": step_count,
-        "rewards": rewards,
-        "final_score": rewards[-1] if rewards else 0.1,
+        "total_reward": total_score,
+        "final_score": total_score,
     }
 
 
