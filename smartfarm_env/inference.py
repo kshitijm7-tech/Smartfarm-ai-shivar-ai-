@@ -177,12 +177,13 @@ def run_agent_on_task(task_name: str, max_steps: int = 20) -> Dict[str, Any]:
                 agent_text = response.choices[0].message.content or ""
             except Exception as e:
                 error_msg = f"LLM API error: {str(e)}"
-                rewards.append(0.1)
+                rewards.append(0.01)
                 print(
-                    f"[STEP] step={step} action=error reward=0.1 "
+                    f"[STEP] step={step} action=error reward=0.01 "
                     f"done=true error={error_msg}"
                 )
                 break
+
 
             # Parse agent response into action
             action_dict = parse_agent_action(agent_text)
@@ -198,15 +199,16 @@ def run_agent_on_task(task_name: str, max_steps: int = 20) -> Dict[str, Any]:
                 obs = env.step(action)
             except Exception as e:
                 error_msg = f"Action error: {str(e)}"
-                rewards.append(0.1)
+                rewards.append(0.01)
                 print(
-                    f"[STEP] step={step} action={action_type} reward=0.1 "
+                    f"[STEP] step={step} action={action_type} reward=0.01 "
                     f"done=true error={error_msg}"
                 )
                 break
 
-            # Record step
-            reward = float(obs.reward or 0.1)
+
+            # Record step (Reward Balancing expects total sum to match score)
+            reward = float(obs.reward or 0.01)
             rewards.append(reward)
             done = obs.done
             error = obs.last_action_error
@@ -219,10 +221,10 @@ def run_agent_on_task(task_name: str, max_steps: int = 20) -> Dict[str, Any]:
                     action_str = f"{action_type}({param_str})"
 
             print(
-                f"[STEP] step={step} action={action_str} "
-                f"reward={reward:.1f} done={str(done).lower()} "
-                f"error={error if error else 'null'}"
+                f"[STEP] step={step} action={action_str} reward={reward:.2f} "
+                f"done={str(done).lower()} error={error if error else 'null'}"
             )
+
 
             if done:
                 success = obs.score is not None and obs.score > 0.0
@@ -253,17 +255,28 @@ def run_agent_on_task(task_name: str, max_steps: int = 20) -> Dict[str, Any]:
     except Exception as e:
         error_msg = str(e)
         if not rewards:
-            rewards.append(0.1)
-        print(
-            f"[STEP] step={step_count} action=error reward=0.1 "
-            f"done=true error={error_msg}"
-        )
+            rewards.append(0.01)
+        
+        # Calculate success based on final score if possible
+        # In Reward Balancing, sum(rewards) should be the final score.
+        final_total = sum(rewards)
+        success = final_total >= 0.3  # Simple threshold for success reporting
+        
+        rewards_str = ",".join(f"{r:.2f}" for r in rewards)
+        print(f"[END] success={str(success).lower()} steps={len(rewards)} rewards={rewards_str}")
+        return {
+            "success": success,
+            "steps": len(rewards),
+            "total_reward": final_total,
+            "final_score": rewards[-1] if rewards else 0.01,
+        }
 
     finally:
         env.close()
 
-    # Print END line
-    rewards_str = ",".join(f"{r:.1f}" for r in rewards)
+    # Print END line (Using 2-decimal formatting)
+    rewards_str = ",".join(f"{r:.2f}" for r in rewards)
+
     print(
         f"[END] success={str(success).lower()} steps={step_count} "
         f"rewards={rewards_str}"

@@ -89,7 +89,7 @@ class SmartFarmObservation(Observation):
     )
 
     score: float = Field(
-        default=0.1,
+        default=0.01,
         description="Final grading score (0.0 to 1.0) after plan submission",
     )
 
