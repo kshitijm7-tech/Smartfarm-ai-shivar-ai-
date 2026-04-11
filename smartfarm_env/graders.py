@@ -5,6 +5,7 @@ Each grader scores an agent's submitted plan on a 0.0–1.0 scale
 using deterministic, reproducible rubric criteria.
 """
 
+import math
 from typing import Any, Dict, List
 
 
@@ -87,8 +88,10 @@ def grade_soil_health_report(
     ]
     has_recommendation = _check_keywords(plan, recommendation_keywords) > 0.0
     quality_score = (length_score * 0.6 + (0.4 if has_recommendation else 0.0)) * 0.30
-
     total = round(min(tool_score + keyword_score + quality_score, 1.0), 2)
+
+    if math.isnan(total):
+        total = 0.05
     return max(0.05, min(total, 0.95))
 
 
@@ -137,8 +140,10 @@ def grade_crop_selection(
     # 5. Financial (0.15)
     finance_keywords = ["profit", "budget", "cost", "revenue", "income", "expense", "₹", "rupee"]
     finance_score = _check_keywords(plan, finance_keywords) * 0.15
-
     total = round(min(tool_score + soil_score + risk_score + crop_total + finance_score, 1.0), 2)
+
+    if math.isnan(total):
+        total = 0.05
     return max(0.05, min(total, 0.95))
 
 
@@ -206,8 +211,10 @@ def grade_full_farm_plan(
     action_score = _check_keywords(plan, action_keywords) * 0.10
     length_score = _plan_length_score(plan, min_words=100, target_words=300) * 0.10
     detail_total = action_score + length_score
-
     total = round(min(tool_score + completeness + risk_score + finance_score + detail_total, 1.0), 2)
+
+    if math.isnan(total):
+        total = 0.05
     return max(0.05, min(total, 0.95))
 
 
