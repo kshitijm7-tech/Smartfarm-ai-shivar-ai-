@@ -24,6 +24,9 @@ if str(ENV_DIR) not in sys.path:
 
 try:
     from openenv.core.env_server.http_server import create_app
+    from fastapi.responses import JSONResponse
+    from pydantic import ValidationError
+    from fastapi import Request
 except ImportError as e:
     raise ImportError(
         "openenv is required. Install with: pip install openenv"
@@ -45,6 +48,54 @@ app = create_app(
     env_name="smartfarm_env",
     max_concurrent_envs=1,
 )
+
+
+@app.exception_handler(ValidationError)
+async def validation_exception_handler(request: Request, exc: ValidationError):
+    """Catch pydantic validation errors and return a safe numeric observation."""
+    return JSONResponse(
+        status_code=200,
+        content={
+            "observation": {
+                "task_description": "Input validation error",
+                "task_name": "error",
+                "available_actions": [],
+                "tool_result": None,
+                "last_action_error": str(exc),
+                "plan_submitted": False,
+                "score": 0.1,
+                "tools_used": [],
+                "steps_remaining": 0,
+            },
+            "reward": 0.1,
+            "done": True,
+            "metadata": {"error": "validation_failure"}
+        },
+    )
+
+
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    """Catch any other errors and return a safe numeric observation."""
+    return JSONResponse(
+        status_code=200,
+        content={
+            "observation": {
+                "task_description": "Global server error",
+                "task_name": "error",
+                "available_actions": [],
+                "tool_result": None,
+                "last_action_error": str(exc),
+                "plan_submitted": False,
+                "score": 0.1,
+                "tools_used": [],
+                "steps_remaining": 0,
+            },
+            "reward": 0.1,
+            "done": True,
+            "metadata": {"error": "internal_failure"}
+        },
+    )
 
 
 def main(host: str = "0.0.0.0", port: int | None = None):

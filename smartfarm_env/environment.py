@@ -107,44 +107,59 @@ class SmartFarmEnvironment(Environment):
         Returns:
             SmartFarmObservation with task description and available actions
         """
-        # Load task configuration
-        task_name = task_name or DEFAULT_TASK
-        self._task_config = get_task(task_name)
-        self._task_name = task_name
+        try:
+            # Load task configuration
+            task_name = task_name or DEFAULT_TASK
+            self._task_config = get_task(task_name)
+            self._task_name = task_name
 
-        # Reset episode state
-        self._tools_used = []
-        self._tool_results = []
-        self._unique_tools = set()
-        self._done = False
-        self._max_steps = self._task_config.get("max_steps", MAX_STEPS_FALLBACK)
-        self._cumulative_reward = 0.0
+            # Reset episode state
+            self._tools_used = []
+            self._tool_results = []
+            self._unique_tools = set()
+            self._done = False
+            self._max_steps = self._task_config.get("max_steps", MAX_STEPS_FALLBACK)
+            self._cumulative_reward = 0.0
 
-        # Reset state
-        self._state = State(
-            episode_id=episode_id or str(uuid4()),
-            step_count=0,
-        )
+            # Reset state
+            self._state = State(
+                episode_id=episode_id or str(uuid4()),
+                step_count=0,
+            )
 
-        return SmartFarmObservation(
-            task_description=self._task_config["description"],
-            task_name=task_name,
-            available_actions=[
-                "analyze_soil",
-                "check_disease",
-                "recommend_crop",
-                "assess_risk",
-                "submit_plan",
-            ],
-            tool_result=None,
-            last_action_error=None,
-            plan_submitted=False,
-            score=0.1,
-            done=False,
-            reward=0.1,
-            tools_used=[],
-            steps_remaining=self._max_steps,
-        )
+            return SmartFarmObservation(
+                task_description=self._task_config["description"],
+                task_name=task_name,
+                available_actions=[
+                    "analyze_soil",
+                    "check_disease",
+                    "recommend_crop",
+                    "assess_risk",
+                    "submit_plan",
+                ],
+                tool_result=None,
+                last_action_error=None,
+                plan_submitted=False,
+                score=0.1,
+                done=False,
+                reward=0.1,
+                tools_used=[],
+                steps_remaining=self._max_steps,
+            )
+        except Exception as e:
+            # Fallback for failed reset (e.g. unknown task)
+            return SmartFarmObservation(
+                task_description=f"Error initializing task: {str(e)}",
+                task_name="error",
+                tool_result=None,
+                last_action_error=str(e),
+                plan_submitted=False,
+                score=0.1,
+                done=True,
+                reward=0.1,
+                tools_used=[],
+                steps_remaining=0,
+            )
 
     def step(
         self,
@@ -162,74 +177,88 @@ class SmartFarmEnvironment(Environment):
         Returns:
             SmartFarmObservation with tool results and reward
         """
-        self._state.step_count += 1
+        try:
+            self._state.step_count += 1
 
-        # Check if episode is already done
-        if self._done:
+            # Check if episode is already done
+            if self._done:
+                return SmartFarmObservation(
+                    task_description=None,
+                    task_name=self._task_name,
+                    tool_result=None,
+                    last_action_error="Episode is already done. Call reset() to start a new episode.",
+                    plan_submitted=True,
+                    score=0.1,
+                    done=True,
+                    reward=0.1,
+                    tools_used=list(self._unique_tools),
+                    steps_remaining=0,
+                )
+
+            # Check max steps
+            steps_remaining = self._max_steps - self._state.step_count
+            if steps_remaining < 0:
+                self._done = True
+                return SmartFarmObservation(
+                    task_description=None,
+                    task_name=self._task_name,
+                    tool_result=None,
+                    last_action_error="Maximum steps exceeded. Episode terminated.",
+                    plan_submitted=False,
+                    score=0.1,
+                    done=True,
+                    reward=0.1,
+                    tools_used=list(self._unique_tools),
+                    steps_remaining=0,
+                )
+
+            # Dispatch action
+            action_type = action.action_type
+            params = action.parameters or {}
+
+            if action_type == "submit_plan":
+                return self._handle_submit_plan(params, steps_remaining)
+            elif action_type == "analyze_soil":
+                return self._handle_tool_call(
+                    "analyze_soil", tool_analyze_soil, params, steps_remaining
+                )
+            elif action_type == "check_disease":
+                return self._handle_tool_call(
+                    "check_disease", tool_check_disease, params, steps_remaining
+                )
+            elif action_type == "recommend_crop":
+                return self._handle_tool_call(
+                    "recommend_crop", tool_recommend_crop, params, steps_remaining
+                )
+            elif action_type == "assess_risk":
+                return self._handle_tool_call(
+                    "assess_risk", tool_assess_risk, params, steps_remaining
+                )
+            else:
+                return SmartFarmObservation(
+                    task_description=None,
+                    task_name=self._task_name,
+                    tool_result=None,
+                    last_action_error=f"Unknown action type: {action_type}",
+                    plan_submitted=False,
+                    score=0.1,
+                    done=False,
+                    reward=0.1,
+                    tools_used=list(self._unique_tools),
+                    steps_remaining=steps_remaining,
+                )
+        except Exception as e:
             return SmartFarmObservation(
                 task_description=None,
                 task_name=self._task_name,
                 tool_result=None,
-                last_action_error="Episode is already done. Call reset() to start a new episode.",
-                plan_submitted=True,
-                score=0.1,
-                done=True,
-                reward=0.1,
-                tools_used=list(self._unique_tools),
-                steps_remaining=0,
-            )
-
-        # Check max steps
-        steps_remaining = self._max_steps - self._state.step_count
-        if steps_remaining < 0:
-            self._done = True
-            return SmartFarmObservation(
-                task_description=None,
-                task_name=self._task_name,
-                tool_result=None,
-                last_action_error="Maximum steps exceeded. Episode terminated.",
+                last_action_error=f"Critical environment error: {str(e)}",
                 plan_submitted=False,
                 score=0.1,
                 done=True,
                 reward=0.1,
                 tools_used=list(self._unique_tools),
                 steps_remaining=0,
-            )
-
-        # Dispatch action
-        action_type = action.action_type
-        params = action.parameters or {}
-
-        if action_type == "submit_plan":
-            return self._handle_submit_plan(params, steps_remaining)
-        elif action_type == "analyze_soil":
-            return self._handle_tool_call(
-                "analyze_soil", tool_analyze_soil, params, steps_remaining
-            )
-        elif action_type == "check_disease":
-            return self._handle_tool_call(
-                "check_disease", tool_check_disease, params, steps_remaining
-            )
-        elif action_type == "recommend_crop":
-            return self._handle_tool_call(
-                "recommend_crop", tool_recommend_crop, params, steps_remaining
-            )
-        elif action_type == "assess_risk":
-            return self._handle_tool_call(
-                "assess_risk", tool_assess_risk, params, steps_remaining
-            )
-        else:
-            return SmartFarmObservation(
-                task_description=None,
-                task_name=self._task_name,
-                tool_result=None,
-                last_action_error=f"Unknown action type: {action_type}",
-                plan_submitted=False,
-                score=0.1,
-                done=False,
-                reward=0.1,
-                tools_used=list(self._unique_tools),
-                steps_remaining=steps_remaining,
             )
 
     def _handle_tool_call(
