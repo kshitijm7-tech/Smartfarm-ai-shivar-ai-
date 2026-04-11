@@ -4,3 +4,11 @@ type: space
 runtime: fastapi
 app: server.app:app
 port: 7860
+inference_script: inference.py
+description: "Agricultural AI advisory environment for farm management tasks."
+tags:
+  - agriculture
+  - farm-management
+  - soil-health
+  - crop-recommendation
+  - openenv

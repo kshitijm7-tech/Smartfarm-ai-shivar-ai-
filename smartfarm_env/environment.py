@@ -246,7 +246,8 @@ class SmartFarmEnvironment(Environment):
 
             # SHAPING: Give higher reward for first-time use of useful tools
             reward = 0.05 if is_new_tool else 0.02
-            self._cumulative_extra_reward += reward
+            self._cumulative_extra_reward = round(self._cumulative_extra_reward + reward, 2)
+
 
             return SmartFarmObservation(
                 task_description=None,
