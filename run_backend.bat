@@ -4,7 +4,7 @@ echo   Smart Farm AI - Backend Server
 echo ==========================================
 echo.
 echo Installing/Checking dependencies...
-pip install -r backend/requirements.txt
+python -m pip install -r backend/requirements.txt
 echo.
 echo Initializing Database...
 python backend/database.py

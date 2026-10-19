@@ -466,6 +466,58 @@ def get_agronomist_response(user_message, language_pref):
         "answer": mock_expert_answer
     }
 
+
+@app.route('/chat', methods=['POST'])
+def chat():
+    """
+    AI Agronomist Chat API endpoint.
+    Expects JSON: { user_message, language_pref? }
+    """
+    data = request.get_json() or {}
+    user_message = data.get('user_message', '').strip()
+    language_pref = data.get('language_pref', 'English')
+    if not user_message:
+        return jsonify({"error": "user_message is required"}), 400
+    response = get_agronomist_response(user_message, language_pref)
+    return jsonify(response), 200
+
+
+@app.route('/api/market/add', methods=['POST'])
+def market_add():
+    """
+    Add a new marketplace listing.
+    Expects JSON: { farmer_id, crop_name, expected_yield_kg, price_per_kg, harvest_date }
+    """
+    data = request.get_json() or {}
+    farmer_id = data.get('farmer_id', 1)
+    crop_name = data.get('crop_name')
+    expected_yield_kg = data.get('expected_yield_kg', 0)
+    price_per_kg = data.get('price_per_kg', 0)
+    harvest_date = data.get('harvest_date', '')
+
+    if not crop_name:
+        return jsonify({"error": "crop_name is required"}), 400
+
+    listing_id = add_market_listing(farmer_id, crop_name, expected_yield_kg, price_per_kg, harvest_date)
+    return jsonify({
+        "status": "success",
+        "message": "Market listing added successfully",
+        "listing_id": listing_id
+    }), 201
+
+
+@app.route('/api/market/view', methods=['GET'])
+def market_view():
+    """
+    Retrieve all active marketplace listings.
+    """
+    listings = get_all_market_listings()
+    return jsonify({
+        "status": "success",
+        "listings": listings
+    }), 200
+
+
 @app.route('/api/mandi/prices', methods=['GET'])
 def get_mandi_prices():
     """
